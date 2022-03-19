@@ -19,7 +19,7 @@ public class Usuario {
 
     public boolean hasValidCredentials() {
         String passwordFound =  usuarios.get(this.Usuario);
-        return passwordFound == this.Password;
+        return passwordFound.equals(this.Password);
     }
 
     private void loadUsersFileData() {

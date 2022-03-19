@@ -9,7 +9,6 @@ public class Main {
     public static final String TEXTO_AMARILLO = "\u001B[33m";
     public static final String TEXTO_AZUL = "\u001B[34m";
 
-
     public static void main(String[] args) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println(TEXTO_VERDE + "### Bienvenido al sistema de citas ###");
@@ -42,6 +41,15 @@ public class Main {
                             Paciente paciente = new Paciente(nombrePaciente);
                             paciente.crearPaciente();
                             System.out.println(TEXTO_AZUL + "Paciente creado exitosamente!");
+                            break;
+                        case "2":
+                            System.out.print(TEXTO_AMARILLO + "Ingrese nombre completo del doctor: ");
+                            String nombreDoctor = reader.readLine();
+                            System.out.print(TEXTO_AMARILLO + "Ingrese especialidad del doctor: ");
+                            String especialidad = reader.readLine();
+                            Doctor doctor = new Doctor(nombreDoctor, especialidad);
+                            doctor.crearDoctor();
+                            System.out.println(TEXTO_AZUL + "Doctor creado exitosamente!");
                             break;
                         default:
                             System.out.print(TEXTO_AMARILLO + "Accion no valida: ");

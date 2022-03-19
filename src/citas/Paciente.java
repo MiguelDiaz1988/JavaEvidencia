@@ -1,34 +1,39 @@
 package citas;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Paciente {
     private String Nombre;
     private LinkedHashMap<String, String> pacientes = new LinkedHashMap<>();
-    private String  FILE_NAME = "src\\citas\\pacientes.csv";
+    private String  FILE_NAME = "src\\citas\\db\\pacientes.csv";
 
     public Paciente(String nombre) {
         this.Nombre = nombre;
         this.loadPacientesFileData();
     }
 
-    public void crearPaciente() {
-        pacientes.put(String.valueOf(pacientes.size() + 1), this.Nombre);
+    public int crearPaciente() {
+        int newId = pacientes.size() + 1;
+        pacientes.put(String.valueOf(newId), this.Nombre);
         this.saveData();
+        return newId;
     }
 
     private void loadPacientesFileData() {
-        BufferedReader bufferedReader = null;
         try {
-            bufferedReader = new BufferedReader(new FileReader(FILE_NAME));
-            String line;
+            File file = new File(FILE_NAME);
+            if (!file.exists()) {
+                file.createNewFile();
+                return;
+            }
 
-            while((line = bufferedReader.readLine()) != null) {
+            BufferedReader bufferedReader = null;
+            var fileReader =
+                    bufferedReader = new BufferedReader(new FileReader(FILE_NAME));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
                 String[] values = line.split(",");
                 pacientes.put(values[0], values[1]);
             }

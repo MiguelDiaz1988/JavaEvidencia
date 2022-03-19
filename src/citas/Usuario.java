@@ -1,15 +1,15 @@
 package citas;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Usuario {
     private String Usuario;
     private String Password;
 
     private HashMap<String, String> usuarios = new HashMap<>();
-    private String  FILE_NAME = "src\\citas\\usuarios.csv";
+    private String  FILE_NAME = "src\\citas\\db\\usuarios.csv";
 
     public Usuario(String usuario, String password) {
         this.Usuario = usuario;
@@ -23,8 +23,15 @@ public class Usuario {
     }
 
     private void loadUsersFileData() {
-        BufferedReader bufferedReader = null;
         try {
+            File file = new File(FILE_NAME);
+            if (!file.exists()) {
+                file.createNewFile();
+                this.createDefaultAdmins();
+                return;
+            }
+
+            BufferedReader bufferedReader = null;
             bufferedReader = new BufferedReader(new FileReader(FILE_NAME));
             String line;
 
@@ -34,6 +41,23 @@ public class Usuario {
             }
         } catch (Exception ex) {
             System.out.println("Error:" + ex.getMessage());
+        }
+    }
+
+    private void createDefaultAdmins() {
+        BufferedWriter bufferedWriter = null;
+        try {
+            bufferedWriter = new BufferedWriter(new FileWriter(FILE_NAME));
+            bufferedWriter.write("admin,admin123\n");
+            bufferedWriter.write("admin2,admin456\n");
+        } catch (Exception ex) {
+            System.out.println("Error cuando se intento guardar los datos de pacientes: " + ex.getMessage());
+        } finally {
+            try {
+                bufferedWriter.close();
+            } catch (Exception ex) {
+                System.out.println("Error cuando se intento guardar los datos de pacientes: " + ex.getMessage());
+            }
         }
     }
 }

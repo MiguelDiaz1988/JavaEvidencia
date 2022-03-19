@@ -39,8 +39,8 @@ public class Main {
                             System.out.print(TEXTO_AMARILLO + "Ingrese nombre completo de paciente: ");
                             String nombrePaciente = reader.readLine();
                             Paciente paciente = new Paciente(nombrePaciente);
-                            paciente.crearPaciente();
-                            System.out.println(TEXTO_AZUL + "Paciente creado exitosamente!");
+                            int newPacienteId = paciente.crearPaciente();
+                            System.out.println(TEXTO_AZUL + "Paciente creado exitosamente con ID:" + newPacienteId);
                             break;
                         case "2":
                             System.out.print(TEXTO_AMARILLO + "Ingrese nombre completo del doctor: ");
@@ -48,8 +48,22 @@ public class Main {
                             System.out.print(TEXTO_AMARILLO + "Ingrese especialidad del doctor: ");
                             String especialidad = reader.readLine();
                             Doctor doctor = new Doctor(nombreDoctor, especialidad);
-                            doctor.crearDoctor();
-                            System.out.println(TEXTO_AZUL + "Doctor creado exitosamente!");
+                            int newDoctorId = doctor.crearDoctor();
+                            System.out.println(TEXTO_AZUL + "Doctor creado exitosamente con ID:" + newDoctorId);
+                            break;
+                        case "3":
+                            System.out.print(TEXTO_AMARILLO + "Ingrese codigo del doctor: ");
+                            String idDoctor = reader.readLine();
+                            System.out.print(TEXTO_AMARILLO + "Ingrese codigo paciente: ");
+                            String idPaciente = reader.readLine();
+                            System.out.print(TEXTO_AMARILLO + "Ingrese motivo de cita: ");
+                            String motivo = reader.readLine();
+                            System.out.print(TEXTO_AMARILLO + "Ingrese fecha de cita: ");
+                            String fechaCita = reader.readLine();
+
+                            Cita cita = new Cita(idDoctor, idPaciente, motivo, fechaCita);
+                            int newCitaId = cita.crearCita();
+                            System.out.println(TEXTO_AZUL + "Cita creada exitosamente con ID:" + newCitaId);
                             break;
                         default:
                             System.out.print(TEXTO_AMARILLO + "Accion no valida: ");

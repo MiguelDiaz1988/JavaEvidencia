@@ -19,6 +19,7 @@ public class Usuario {
 
     public boolean hasValidCredentials() {
         String passwordFound =  usuarios.get(this.Usuario);
+        if (passwordFound == null) return false;
         return passwordFound.equals(this.Password);
     }
 

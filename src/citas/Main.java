@@ -66,7 +66,7 @@ public class Main {
                             System.out.println(TEXTO_AZUL + "Cita creada exitosamente con ID:" + newCitaId);
                             break;
                         default:
-                            System.out.print(TEXTO_AMARILLO + "Accion no valida: ");
+                            System.out.println(TEXTO_ROJO + "Accion no valida");
                             break;
                     }
                 }
